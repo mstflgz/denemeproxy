@@ -4,9 +4,17 @@ const https = require('https'); // SSL ayarı için eklendi
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Rastgele bir Türk Telekom/Superonline IP bloğu üretiyoruz
+const randomIP = `85.110.15.${Math.floor(Math.random() * 255)}`;
+
 const TARGET_HEADERS = {
     'Referer': 'https://taraftarium.xyz/',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0'
+    'Origin': 'https://taraftarium.xyz',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0',
+    'Accept': '*/*',
+    'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+    'X-Forwarded-For': randomIP,
+    'X-Real-IP': randomIP
 };
 
 // Geçersiz SSL sertifikalarını görmezden gelmek için ajan oluşturuyoruz
